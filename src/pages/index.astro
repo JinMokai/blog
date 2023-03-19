@@ -1,0 +1,45 @@
+---
+import Author from "@components/author.astro";
+import Footer from "@components/footer.astro";
+import BackTop from "@components/backTop.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const title = "主页";
+const description = "主页";
+---
+
+<BaseLayout title={title} description={description}>
+  <main>
+    <Author />
+    <div class="container">
+      <strong>你好！</strong>
+      <p>作为一位热爱象棋和代码的工程师，我始终追求书写优雅简洁的代码，让程序更易读、易扩展和易维护。</p>
+      <p>在我的学习生涯中，我积极探索各种编程语言和技术框架，不断学习和实践新的编程思想和最佳实践。我注重团队合作和知识分享，在项目开发过程中与同事紧密配合，共同推动产品的快速迭代和持续优化。</p>
+      <p>在我的象棋爱好中，我喜欢挑战各种难度的局面，并通过计算机程序和数据分析等手段来改进我的下棋技巧。我相信，从象棋游戏中学到的坚韧、耐心和创造力，也将对我的工作和生活产生积极影响。</p>
+      <p>无论是在编程还是在象棋中，我都努力追求卓越，不断突破自我，成为一个更加优秀和全面的工程师。</p>
+    </div>
+  </main>
+  <BackTop />
+  <footer>
+    <Footer />
+  </footer>
+</BaseLayout>
+<style>
+  .container {
+    margin-inline: auto;
+    margin-block-start: max(8vh, 3rem);
+    width: min(80ch, 100vw - 2rem);
+  }
+  .container >strong {
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+  .container p {
+    text-indent: 2em;
+    line-height: 1.5;
+    margin-top: 1em;
+  }
+  footer {
+    margin-block-start: 6.25rem;
+  }
+</style>

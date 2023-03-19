@@ -1,0 +1,101 @@
+---
+import PostLayout from "@layouts/PostLayout.astro";
+import MarkContent from "@components/markContent.astro";
+import Footer from "@components/footer.astro";
+import ContentAuthor from "@components/contentAuthor.astro";
+import BackTop from "@components/backTop.astro";
+import TableOfContents from "@components/table/TableOfContents.astro";
+import Tags from "@components/tags.astro";
+import Side from "@components/side.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("blog", ({ data }) => {
+    // 如果是不是草稿就显示
+    return data.draft === false;
+  });
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+const { entry } = Astro.props;
+const {
+  data: { title, description, pubDate, updateDate, author, tags },
+  slug,
+} = entry;
+
+// remarkPluginFrontmatter 直接修改frontmatter会出现问题？ 2023-3-18 时间https://docs.astro.build/en/guides/content-collections/#modifying-frontmatter-with-remark
+const { Content, remarkPluginFrontmatter, headings } = await entry.render();
+const arr = remarkPluginFrontmatter.minutesRead.split(" ");
+const readTime = arr[0] + " " + (arr[1] == "min" ? "分钟" : arr[1]);
+console.log(tags);
+---
+
+<PostLayout title={title} description={description}>
+  <div class="main_side">
+    <Side />
+  </div>
+  <main>
+    <ContentAuthor
+      readTime={readTime}
+      author={author}
+      pubDate={pubDate}
+      updateDate={updateDate}
+      slug={slug}
+      remarkPluginFrontmatter={remarkPluginFrontmatter}
+    />
+    <MarkContent Content={Content} />
+    <div class="main_tags">
+      <Tags tags={tags} />
+    </div>
+  </main>
+  <!-- 目录 -->
+  <TableOfContents headings={headings} />
+  <!-- 回到顶部按钮 -->
+  <BackTop />
+  <!--  -->
+  <Footer class="slug_bottom" />
+</PostLayout>
+
+<style>
+  main {
+    width: min(60ch, 80vw);
+    margin: 0 auto;
+    font-size: 0.75rem;
+  }
+  .main_tags {
+    margin-block-start: 1rem;
+    border-top: 3px solid #e8e9eb;
+  }
+  .main_side {
+    position: fixed;
+    left: 0;
+  }
+  /* 父传子 加文件前缀* 自定义 */
+  .slug_bottom {
+    margin-block-start: 5rem;
+  }
+</style>
+
+<script>
+
+// 获取所有标题元素和目录元素
+const headings = document.querySelectorAll(".markdown_content h1,h2,h3,h4,h5,h6");
+// 在窗口上添加滚动事件处理函数
+window.addEventListener("scroll", () => {
+  // 遍历所有标题元素
+  headings.forEach((heading) => {
+    const id = heading.getAttribute("id");
+    const link = document.querySelector(`.toc a[href="#${id}"]`);
+    if (link) {
+      const rect = heading.getBoundingClientRect();
+      if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+        link.classList.add("table_active"); // 添加样式
+      } else {
+        link.classList.remove("table_active"); // 移除样式
+      }
+    }
+  });
+});
+</script>

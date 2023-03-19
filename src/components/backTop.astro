@@ -1,0 +1,52 @@
+---
+---
+
+<button aria-label="回到顶部" type="button" class="tip_box_top">
+  <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" class="Zi Zi--BackToTop" fill=""
+    ><path
+      fill-rule="evenodd"
+      d="M13.204 3.107a1.75 1.75 0 0 0-2.408 0L3.806 9.73c-1.148 1.088-.378 3.02 1.204 3.02h2.24V20c0 .966.784 1.75 1.75 1.75h6A1.75 1.75 0 0 0 16.75 20v-7.25h2.24c1.582 0 2.353-1.932 1.204-3.02l-6.99-6.623Z"
+      clip-rule="evenodd"></path>
+  </svg>
+</button>
+<style>
+  .tip_box_top {
+    position: fixed;
+    bottom: 1rem;
+    right: 0.5rem;
+    border: 0;
+    padding: 0.5rem;
+    z-index: 10000;
+    border-radius: 0.125rem;
+    cursor: pointer;
+    transition: all 0.1s;
+    display: none;
+  }
+  .tip_box_top:hover {
+    background-color: rgb(211, 211, 211);
+  }
+</style>
+<script>
+  const backTop = document.querySelector(".tip_box_top");
+  function checkScrollPosition() {
+    if (document.documentElement.scrollTop > 300) {
+      backTop.style.display = "block";
+    } else {
+      backTop.style.display = "none";
+    }
+  }
+  document.addEventListener("DOMContentLoaded", () => {
+    checkScrollPosition();
+  });
+  document.addEventListener("scroll", () => {
+    checkScrollPosition();
+  });
+
+  backTop.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    
+  });
+</script>

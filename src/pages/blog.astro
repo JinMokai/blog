@@ -1,0 +1,43 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import ItemCard from "@components/itemCard.astro";
+import Footer from "@components/footer.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort((a, b) => {
+  const dateA = new Date(a.data.pubDate).getDay();
+  const dateB = new Date(b.data.pubDate).getDay();
+  return dateB - dateA;
+});
+const title = "文章";
+const description = "文章";
+
+---
+
+<BaseLayout title={title} description={description}>
+  <h1>最新文章</h1>
+  <ul class="blog_itemCard">
+    {
+      posts.map((post) => (
+        <ItemCard slug={post.slug} title={post.data.title} description={post.data.description} image={post.data.image} pubDate={post.data.pubDate}/>
+      ))
+    }
+  </ul>
+  <footer>
+    <Footer />
+  </footer>
+</BaseLayout>
+
+<style>
+  h1 {
+    text-align: center;
+    margin-block-end: 0.9375rem;
+  }
+  footer {
+    margin-block-start: 3.125rem;
+  }
+  .blog_itemCard {
+    width: min(50ch, 90vw);
+    margin: 0 auto;
+  }
+</style>

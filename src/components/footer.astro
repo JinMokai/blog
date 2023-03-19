@@ -1,0 +1,26 @@
+---
+const { class: slug_bottom } = Astro.props
+---
+
+<footer class={slug_bottom} data-footer>
+    <p>
+        © 2023 Copyright jinkai. All rights reserved.
+        Made in China use <a href="https://astro.build/" target="_blank" rel="noopener noreferrer">Astro</a>
+        ❤️
+    </p>
+</footer>
+
+<style>
+footer[data-footer] {
+    font-size: 0.75rem;
+    width: 100%;
+    text-align: center;
+    padding: 0.625rem 0;
+    border-block-start: 0.125rem dashed rgba(229, 219, 209, 1);
+    background: #f5f1ec;
+}
+footer[data-footer] p a {
+    text-decoration: underline;
+    text-underline-offset: 0.05em
+}
+</style>

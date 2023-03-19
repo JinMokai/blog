@@ -1,0 +1,66 @@
+---
+import SideIndex from "@components/sideIndex.astro";
+// 重要图片存到src中
+import tou from "../assets/tou.jpg"
+---
+<div class="index_header">
+  <div class="index_header_author">
+    <div class="info_author">
+      <img src={tou} alt="author photo"  data-img/>
+      <div class="info_word">
+        <h1>@Ch_kai</h1>
+        <SideIndex />
+        <p class="word_infos">
+          <strong>热爱于优雅的Coding与China chess!</strong>
+          <small>🔥❤️👨‍💻🎩🐉♟️</small>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.index_header {
+    min-height: calc(60vh - 5.5rem);
+    display: flex;
+    place-content: center;
+    box-sizing: border-box;
+    padding-bottom: max(5vh, 2.5rem);
+    padding-top: max(5vh, 2rem);
+    text-align: center;
+    border-bottom: 0.1875rem dashed #3f3f46;
+  }
+  .index_header_author {
+    width: min(80ch, 100vw - 2rem);
+    margin: 0 auto;
+  }
+
+  .info_author {
+    display: grid;
+    grid-gap: 1rem;
+  }
+  .info_author > [data-img] {
+    width: min(80%, 30vw);
+    height: auto;
+    place-self: center;
+    border: 3px dashed skyblue;
+    border-radius: 50%;
+    vertical-align: middle;
+    transition: all 0.3s;
+  }
+  .info_author h1 {
+    font-size: clamp(2rem, 1rem + 5vw, 4rem);
+  }
+  .word_infos {
+    text-indent: 2em;
+    font-size: 0.875rem;
+  }
+  .word_infos strong,small {
+    display: block;
+  }
+  @media (min-width: 44rem) {
+    .info_author {
+      grid-template-columns: 1fr minmax(50ch, 1fr);
+    }
+  }
+</style>

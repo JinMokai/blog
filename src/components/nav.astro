@@ -1,0 +1,38 @@
+---
+---
+
+<div class="nav">
+  <ul class="nav_ul">
+    <li class="nav_li"><a href="/">主页</a></li>
+    <li class="nav_li"><a href="/blog">文章</a></li>
+    <li class="nav_li"><a href="/about">图片集</a></li>
+    <li class="nav_li"><a href="/tags">分类</a></li>
+  </ul>
+</div>
+
+<style>
+  .nav {
+    font-size: 1rem;
+    padding: 1.5rem 0 3rem;
+    box-sizing: border-box;
+    /* padding: .5rem 1rem; */
+    color: rgb(63 63 70);
+  }
+  .nav_ul {
+    display: flex;
+    justify-content: center;
+  }
+  .nav_li {
+    margin: 0 0.25rem;
+    line-height: normal;
+  }
+  .nav_li > a{
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
+    transition: text-underline-offset .2s;
+  }
+  .nav_li > a:hover {
+    text-underline-offset: 0.125rem;
+  }
+</style>

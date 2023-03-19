@@ -1,0 +1,62 @@
+---
+import TagLayout from "@layouts/TagLayout.astro";
+import ItemCard from "@components/itemCard.astro";
+import Footer from "@components/footer.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const tagsEntries = await getCollection("blog");
+  const uniqueTags = [...new Set(tagsEntries.map((post) => post.data.tags).flat())];
+  return uniqueTags.map((tag) => {
+    // 筛选出包含tag标签的blog
+    const filteredPosts = tagsEntries.filter((post) => post.data.tags.includes(tag));
+    // blog排序
+    const sortPosts = filteredPosts.sort((a, b) => {
+      const dateA = new Date(a.data.pubDate).getDay();
+      const dateB = new Date(b.data.pubDate).getDay();
+      return dateB - dateA;
+    });
+    return {
+      params: { tag },
+      props: { posts: sortPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<TagLayout title={tag}>
+  <main>
+    <h1 class="tag_topic">
+      <span>#</span>
+      {tag}
+    </h1>
+    {
+      posts.map((post) => (
+        <ItemCard slug={post.slug} title={post.data.title} description={post.data.description} image={post.data.image} pubDate={post.data.pubDate}/>
+      ))
+    }
+  </main>
+  <div class="tag_footer">
+    <Footer />
+  </div>
+</TagLayout>
+<style>
+  main {
+    flex: 1;
+    width: min(60ch, 80vw);
+    min-height: 100vh;
+    margin: 0 auto;
+    font-size: 0.75rem;
+  }
+  .tag_topic {
+    font-size: 2rem;
+    text-align: center;
+  }
+  .tag_footer {
+    margin-block-start: 6.25rem;
+    width: 100%;
+  }
+</style>

@@ -1,0 +1,79 @@
+---
+const { slug, author, pubDate, updateDate, readTime, remarkPluginFrontmatter } = Astro.props;
+import litterAuthor from "@src/assets/original2.jpg"
+---
+
+<div class="content_top">
+  <h1 class="content_h1">{slug}</h1>
+  <div class="author">
+    <a href="/">
+      <img src={litterAuthor} alt="作者照片" />
+    </a>
+    <span>作者:{author}</span>
+  </div>
+  <div class="content_info">
+    <div class="content_dl">
+      <div class="content_dt">
+        <div class="top">发布时间</div>
+        <div class="bottom">{pubDate}</div>
+      </div>
+      <div class="content_dt">
+        <div class="top">更新时间</div>
+        <div class="bottom">{updateDate == "" ? "/" : updateDate}</div>
+      </div>
+      <div class="content_dt">
+        <div class="top">阅读时间</div>
+        <div class="bottom">{readTime == "" ? remarkPluginFrontmatter.minutesRead : readTime}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="space"></div>
+
+<style>
+  .author {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-block-end: 1rem;
+  }
+  .author a {
+  }
+  .author a > img {
+    vertical-align: top;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    margin-inline-end: 0.5em;
+  }
+  .author  span {
+    font-size: 0.625rem;
+  }
+  .content_h1 {
+    border: none;
+    text-align: center;
+    color: blue;
+    font-weight: 800;
+    font-size: 2.5rem;
+  }
+  .content_dl {
+    display: flex;
+    width: 100%;
+  }
+  .content_dt {
+    flex: 1;
+    text-align: center;
+    padding: 0.5em;
+  }
+  .content_dt > .top {
+    color: #394d5c;
+  }
+  .content_dt >.bottom {
+    font-weight: 700;
+  }
+  .space {
+    height: 6.25rem;
+    margin: 4rem 0;
+    background-color: #f9f7f5;
+  }
+</style>
