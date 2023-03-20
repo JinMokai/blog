@@ -18,8 +18,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository using git
-        uses: actions/checkout@v3
+      - name: Astro Deploy
+        uses: withastro/action@v0.2.0
       - name: Install, build, and upload your site
         uses: withastro/action@v0
         # with:
