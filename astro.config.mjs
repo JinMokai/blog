@@ -3,7 +3,7 @@ import { remarkReadingTime } from './src/scripts/remark-reading-time.mjs';
 
 // https://astro.build/config
 export default defineConfig({
-    site: "https://Jinmark-kai.github.io",
+    site: "https://jinmark-kai.github.io",
     base: "/blog",
     markdown: {
         shikiConfig: {
