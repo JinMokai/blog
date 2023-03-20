@@ -1,16 +1,12 @@
 ---
 const { tags } = Astro.props;
-const arr = [];
-for (const [key, value] of tags.entries()) {
-  arr.push([key, value]);
-}
 ---
 
 <div class="tags">
   {
-    arr.map((tag) => (
+    tags.map((tag) => (
       <p class={`tag `}>
-        <a href={`/tags/${tag[0]}`}>{tag[0]}<span>({tag[1]})</span></a>
+        <a href={`/tags/${tag}`}>{tag}</a>
       </p>
     ))
   }
@@ -32,10 +28,6 @@ for (const [key, value] of tags.entries()) {
     padding: 0.5em 1em;
     font-size: 1.15em;
     background-color: #f8fcfd;
-  }
-  .tag a span {
-    color: gray;
-    font-size: .7rem;
   }
   .tag:hover {
     text-decoration: underline;

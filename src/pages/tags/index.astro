@@ -3,8 +3,21 @@ import TagLayout from "@layouts/TagLayout.astro";
 import Tags from "@components/tags.astro";
 import { getCollection } from "astro:content";
 const tagsEntries = await getCollection("blog");
-const tags = [...new Set(tagsEntries.map((post) => post.data.tags).flat())];
-console.log(tags);
+// 获取所有唯一标签
+// const tags = [...new Set(tagsEntries.map((post) => post.data.tags).flat())];
+const tagMap = new Map();
+tagsEntries.map((post) => {
+  const PostTags = post.data.tags;
+  PostTags.map((tagValue) => {
+    if (tagMap.has(tagValue)) {
+      let count = tagMap.get(tagValue);
+      count += 1;
+      tagMap.set(tagValue, count);
+    } else {
+      tagMap.set(tagValue, 1);
+    }
+  });
+});
 // page info
 const title = "分类";
 const description = "分类";
@@ -13,7 +26,7 @@ const description = "分类";
 <TagLayout title={title} description={description}>
   <main>
     <h1 class="tags_skill">技能</h1>
-    <Tags tags={tags}/>
+    <Tags tags={tagMap} />
   </main>
 </TagLayout>
 
@@ -30,8 +43,4 @@ const description = "分类";
   a {
     color: black;
   }
-
-  /* footer {
-  width: 100%;
-} */
 </style>

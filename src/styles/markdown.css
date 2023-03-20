@@ -205,5 +205,6 @@
 }
 
 .markdown_content img {
+    position: relative;
     max-width: 100%;
 }

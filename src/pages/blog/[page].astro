@@ -5,30 +5,33 @@ import Footer from "@components/footer.astro";
 import BackTop from "@components/backTop.astro";
 import Side from "@components/side.astro";
 import { getCollection } from "astro:content";
-
-const posts = (await getCollection("blog")).sort((a, b) => {
-  const dateA = new Date(a.data.pubDate);
-  const dateB = new Date(b.data.pubDate);
-  return dateB - dateA;
-});
-
-const title = "文章";
-const description = "文章";
-
+export async function getStaticPaths({ paginate }) {
+  const posts = (await getCollection("blog")).sort((a, b) => {
+    const dateA = new Date(a.data.pubDate);
+    const dateB = new Date(b.data.pubDate);
+    return dateB - dateA;
+  });
+  return paginate(posts, { pageSize: 5 });
+}
+const { page } = Astro.props;
+// const title = "文章";
+// const description = "文章";
 ---
 
-<BaseLayout title={title} description={description}>
-  <h1>最新三篇文章</h1>
+<BaseLayout>
+  <h1>第{page.currentPage}页/共{page.lastPage}页</h1>
   <ul class="blog_itemCard">
     {
-      posts.slice(0,3).map((post) => (
+      page.data.map((post) => (
         <ItemCard slug={post.slug} title={post.data.title} description={post.data.description} image={post.data.image} pubDate={post.data.pubDate}/>
       ))
     }
     <div class="pageSize">
-      <a href="/blog/1">查看所有文章</a>
+      {page.url.prev ? <a href={page.url.prev}>上一页</a> : null}
+      {page.url.next ? <a href={page.url.next}>下一页</a> : null}
     </div>
   </ul>
+
   <footer>
     <Footer />
   </footer>
@@ -37,7 +40,7 @@ const description = "文章";
 </BaseLayout>
 
 <style>
-  h1 {
+    h1 {
     text-align: center;
     margin-block-end: 0.9375rem;
   }

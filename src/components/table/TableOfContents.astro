@@ -33,8 +33,15 @@ function buildToc(headings) {
         position: fixed;
         right: 1em;
         top: 5em;
+        max-height: 50vh;
+        max-width: 9.375rem;
+        outline: 1px solid;
         padding-inline-start: .5rem;
         line-height: 1.5;
+        overflow: auto;
+      }
+    .toc::before {
+      content: "目录";
     }
     .toc  ul {
         font-size: 0.625rem;

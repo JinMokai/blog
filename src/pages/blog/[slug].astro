@@ -5,7 +5,7 @@ import Footer from "@components/footer.astro";
 import ContentAuthor from "@components/contentAuthor.astro";
 import BackTop from "@components/backTop.astro";
 import TableOfContents from "@components/table/TableOfContents.astro";
-import Tags from "@components/tags.astro";
+import SlugTag from "@components/slugTag.astro";
 import Side from "@components/side.astro";
 import { getCollection } from "astro:content";
 
@@ -29,7 +29,6 @@ const {
 const { Content, remarkPluginFrontmatter, headings } = await entry.render();
 const arr = remarkPluginFrontmatter.minutesRead.split(" ");
 const readTime = arr[0] + " " + (arr[1] == "min" ? "分钟" : arr[1]);
-console.log(tags);
 ---
 
 <PostLayout title={title} description={description}>
@@ -40,12 +39,12 @@ console.log(tags);
       author={author}
       pubDate={pubDate}
       updateDate={updateDate}
-      slug={slug}
+      slug={title}
       remarkPluginFrontmatter={remarkPluginFrontmatter}
     />
     <MarkContent Content={Content} />
     <div class="main_tags">
-      <Tags tags={tags} />
+      <SlugTag tags={tags} />
     </div>
   </main>
   <!-- 目录 -->
@@ -92,4 +91,21 @@ window.addEventListener("scroll", () => {
     }
   });
 });
+
+// 懒加载
+let timer = null;
+function lazyLoad() {
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    const images = document.querySelectorAll('img[data-src]');
+    images.forEach((img) => {
+      const rect = img.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) {
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+      }
+    });
+  }, 200);
+}
+window.addEventListener('scroll', lazyLoad);
 </script>
