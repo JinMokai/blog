@@ -33,11 +33,13 @@ const { posts } = Astro.props;
       <span>#</span>
       {tag}
     </h1>
-    {
-      posts.map((post) => (
-        <ItemCard slug={post.slug} title={post.data.title} description={post.data.description} image={post.data.image} pubDate={post.data.pubDate}/>
-      ))
-    }
+    <ul>
+      {
+        posts.map((post) => (
+          <ItemCard slug={post.slug} title={post.data.title} description={post.data.description} image={post.data.image} pubDate={post.data.pubDate}/>
+        ))
+      }
+    </ul>
   </main>
   <div class="tag_footer">
     <Footer />

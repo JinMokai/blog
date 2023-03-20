@@ -6,7 +6,7 @@
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"],
       "@styles/*": ["src/styles/*"],
-      "@script/*": ["src/script/*"],
+      "@scripts/*": ["src/scripts/*"],
       "@src/*": ["src/*"]
     },
     "strictNullChecks": true,

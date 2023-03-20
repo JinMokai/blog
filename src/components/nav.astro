@@ -1,13 +1,19 @@
 ---
+import Hamburger from "./Hamburger.astro";
 ---
 
 <div class="nav">
-  <ul class="nav_ul">
-    <li class="nav_li"><a href="/">主页</a></li>
-    <li class="nav_li"><a href="/blog">文章</a></li>
-    <li class="nav_li"><a href="/about">图片集</a></li>
-    <li class="nav_li"><a href="/tags">分类</a></li>
-  </ul>
+  <div class="Hamburger">
+    <Hamburger />
+  </div>
+  <div data-nav>
+    <ul class="nav_ul">
+      <li class="nav_li"><a href="/">主页</a></li>
+      <li class="nav_li"><a href="/blog">文章</a></li>
+      <li class="nav_li"><a href="/about">图片集</a></li>
+      <li class="nav_li"><a href="/tags">分类</a></li>
+    </ul>
+  </div>
 </div>
 
 <style>
@@ -17,6 +23,7 @@
     box-sizing: border-box;
     /* padding: .5rem 1rem; */
     color: rgb(63 63 70);
+    transition: all .3s;
   }
   .nav_ul {
     display: flex;
@@ -35,4 +42,47 @@
   .nav_li > a:hover {
     text-underline-offset: 0.125rem;
   }
+  .Hamburger {
+    display: none;
+  }
+
+  @media screen and (max-width: 600px) {
+    [data-nav] {
+      display: none;
+    }
+    .nav_ul {
+      flex-direction: column;
+      text-align: center;
+    }
+    .nav_li {
+      padding-block-end: 1rem;
+    }
+    .nav_li + .nav_li {
+      padding-block-end: 1rem;
+    }
+    .nav_li a {
+      font-size: 2rem;
+    }
+    
+    .Hamburger {
+      display: block;
+    }
+  }
+  /* 这个css必须放到后面 */
+  .expanded {
+    display: unset;
+  }
 </style>
+<script>
+  let flag = 0;
+  document.querySelector('.Hamburger').addEventListener('click', () => {
+    document.querySelector("[data-nav]").classList.toggle("expanded");
+    if (flag == 0) {
+      document.querySelector(".nav").style.backgroundColor="rgb(254, 207, 72, .2)";
+      flag = 1;
+    } else {
+      document.querySelector(".nav").style.backgroundColor="inherit";
+      flag = 0;
+    }
+  });
+</script>

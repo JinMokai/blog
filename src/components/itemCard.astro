@@ -61,9 +61,19 @@ import post_img from "@src/assets/post_img.webp"
   }
 
   .hr {
-    /* width: 50ch; */
     margin: 0 auto;
     padding-block: 0.0625rem;
     background-color: #e8e9eb;
+  }
+  @media screen and (max-width: 650px) {
+    .lis {
+      flex-direction: column;
+    }
+    .lis [data-img] {
+      max-width: initial;
+    }
+    .lis_content{
+
+    }
   }
 </style>
