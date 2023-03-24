@@ -50,7 +50,10 @@ import post_img from "@src/assets/post_img.webp"
   .lis [data-img] {
     display: block;
     vertical-align: top;
-    max-width: 10rem;
+    /* 这个为了宽屏展示图片信息 */
+    width: 10rem;
+    max-height: 5rem;
+    object-fit: cover;
     border-radius: 0.5rem;
   }
   .lis_content > h1 {
@@ -70,10 +73,9 @@ import post_img from "@src/assets/post_img.webp"
       flex-direction: column;
     }
     .lis [data-img] {
-      max-width: initial;
-    }
-    .lis_content{
-
+      /* 为了窄屏幕展示图片信息 */
+      width: auto;
+      max-height: 10rem;
     }
   }
 </style>

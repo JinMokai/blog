@@ -130,7 +130,6 @@
 
 
 .markdown_content table {
-    *border-collapse: collapse; /* IE7 and lower */
     border-spacing: 0;
     width: 100%;
 }
@@ -207,4 +206,12 @@
 .markdown_content img {
     position: relative;
     max-width: 100%;
+    max-height: fit-content;
+}
+.markdown_content ul,.markdown_content ol{
+    font-size: .8rem;
+    padding-block-end: 1rem;
+}
+.markdown_content blockquote {
+    margin-block: .5rem;
 }

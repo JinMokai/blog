@@ -5,7 +5,7 @@ updateDate: ""
 description: "newspaper-layout"
 author: "ch_kai"
 image:
-    url: ""
+    url: "/assets/content/newpapers/IMG_20210724_063838.jpg"
     alt: "this is photo"
 tags: ["css"]
 draft: false
@@ -14,7 +14,7 @@ draft: false
 # 思考背景
 + 早上看到一份报纸，突发灵感如何实现这种布局呢？🤔
 
-<img class="lazy" data-src="/assets/content/newpapers/IMG_20210724_063838.jpg" alt="newspaper" />
+<img data-src="/assets/content/newpapers/IMG_20210724_063838.jpg" alt="newspaper"/>
 
 ## 过程
 1. 像文本流之类的用浮动可以做，但是有问题。用浮动来解决问题会出现很多麻烦

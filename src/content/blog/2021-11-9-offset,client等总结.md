@@ -55,4 +55,4 @@ draft: false
 
 > 当offsetParent属性设置为fixed返回Null，或者元素display设置none时返回null;或者元素是<body>,<html>也是null
 
-<img class="lazy" data-src="/assets/content/offset.client/Snipaste_2021-11-09_21-31-28.png" alt="window"  />
+<img  data-src="/assets/content/offset.client/Snipaste_2021-11-09_21-31-28.png" alt="window"  />
