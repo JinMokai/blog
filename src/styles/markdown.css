@@ -26,7 +26,7 @@
     content: "#";
     display: inline-block;
     margin-right: .5rem;
-    color: skyblue;
+    color: #051c85;
 }
 .markdown_content :is(h1,h2,h3,h4,h5,h6):visited  {
     color: red;

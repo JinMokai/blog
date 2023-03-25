@@ -32,7 +32,6 @@ const readTime = arr[0] + " " + (arr[1] == "min" ? "分钟" : arr[1]);
 ---
 
 <PostLayout title={title} description={description}>
-  <Side />
   <main>
     <ContentAuthor
       readTime={readTime}
@@ -49,6 +48,7 @@ const readTime = arr[0] + " " + (arr[1] == "min" ? "分钟" : arr[1]);
   </main>
   <!-- 目录 -->
   <TableOfContents headings={headings} />
+  <Side />
   <!-- 回到顶部按钮 -->
   <BackTop />
   <!--  -->
