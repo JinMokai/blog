@@ -2,7 +2,7 @@
 title: "newspaper-layout"
 pubDate: "2021-7-25"
 updateDate: ""
-description: "newspaper-layout"
+description: "一张报纸引起的思考，使用css3多列布局columns!"
 author: "ch_kai"
 image:
     url: "/assets/content/newpapers/IMG_20210724_063838.jpg"

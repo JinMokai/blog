@@ -2,7 +2,7 @@
 title: "@container容器查询"
 pubDate: "2021-7-22"
 updateDate: ""
-description: "@container容器查询"
+description: "@container容器查询，一种很新的语法！"
 author: "ch_kai"
 image:
     url: ""

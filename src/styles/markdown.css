@@ -215,3 +215,12 @@
 .markdown_content blockquote {
     margin-block: .5rem;
 }
+.markdown_content sup {
+    vertical-align: top;
+    font-size: .5em;
+    color: gray;
+    font-weight: 800;
+}
+.markdown_content sup a {
+    all: inherit;
+}

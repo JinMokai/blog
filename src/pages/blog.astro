@@ -6,7 +6,12 @@ import BackTop from "@components/backTop.astro";
 import Side from "@components/side.astro";
 import { getCollection } from "astro:content";
 
-const posts = (await getCollection("blog")).sort((a, b) => {
+const blogEntries = await getCollection("blog", ({ data }) => {
+  // 如果是不是草稿就显示
+  return data.draft === false;
+});
+
+const posts = blogEntries.sort((a, b) => {
   const dateA = new Date(a.data.pubDate);
   const dateB = new Date(b.data.pubDate);
   return dateB - dateA;
@@ -14,16 +19,23 @@ const posts = (await getCollection("blog")).sort((a, b) => {
 
 const title = "文章";
 const description = "文章";
-
 ---
 
 <BaseLayout title={title} description={description}>
   <h1>最新文章</h1>
   <ul class="blog_itemCard">
     {
-      posts.slice(0,3).map((post) => (
-        <ItemCard slug={post.slug} title={post.data.title} description={post.data.description} image={post.data.image} pubDate={post.data.pubDate}/>
-      ))
+      posts
+        .slice(0, 3)
+        .map((post) => (
+          <ItemCard
+            slug={post.slug}
+            title={post.data.title}
+            description={post.data.description}
+            image={post.data.image}
+            pubDate={post.data.pubDate}
+          />
+        ))
     }
     <div class="pageSize">
       <a href="/blog/1">查看所有文章</a>
@@ -48,5 +60,4 @@ const description = "文章";
     width: min(50ch, 90vw);
     margin: 0 auto;
   }
-
 </style>

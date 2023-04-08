@@ -6,24 +6,36 @@ import BackTop from "@components/backTop.astro";
 import Side from "@components/side.astro";
 import { getCollection } from "astro:content";
 export async function getStaticPaths({ paginate }) {
-  const posts = (await getCollection("blog")).sort((a, b) => {
+  const blogEntries = await getCollection("blog", ({ data }) => {
+    // 如果是不是草稿就显示
+    return data.draft === false;
+  });
+
+  const posts = blogEntries.sort((a, b) => {
     const dateA = new Date(a.data.pubDate);
     const dateB = new Date(b.data.pubDate);
     return dateB - dateA;
   });
+
   return paginate(posts, { pageSize: 5 });
 }
 const { page } = Astro.props;
-// const title = "文章";
-// const description = "文章";
+const title = `文章第${page.currentPage}页`;
+const description = `ch_kai的所有的文章`
 ---
 
-<BaseLayout>
+<BaseLayout title={title} description={description}>
   <h1>第{page.currentPage}页/共{page.lastPage}页</h1>
   <ul class="blog_itemCard">
     {
       page.data.map((post) => (
-        <ItemCard slug={post.slug} title={post.data.title} description={post.data.description} image={post.data.image} pubDate={post.data.pubDate}/>
+        <ItemCard
+          slug={post.slug}
+          title={post.data.title}
+          description={post.data.description}
+          image={post.data.image}
+          pubDate={post.data.pubDate}
+        />
       ))
     }
     <div class="pageSize">
@@ -40,7 +52,7 @@ const { page } = Astro.props;
 </BaseLayout>
 
 <style>
-    h1 {
+  h1 {
     text-align: center;
     margin-block-end: 0.9375rem;
   }
@@ -51,5 +63,4 @@ const { page } = Astro.props;
     width: min(50ch, 90vw);
     margin: 0 auto;
   }
-
 </style>
