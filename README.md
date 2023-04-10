@@ -11,4 +11,4 @@
 
 > 时间 2023-4-8
 
-![灯塔打分](https://imgloc.com/i/i3y9kb)
+[![灯塔打分](https://i.328888.xyz/2023/04/08/i3y9kb.md.png)](https://imgloc.com/i/i3y9kb)

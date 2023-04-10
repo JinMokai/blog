@@ -224,3 +224,9 @@
 .markdown_content sup a {
     all: inherit;
 }
+.markdown_content p {
+    text-indent: 2em;
+}
+.markdown_content :where(ul, ol) {
+    list-style: disc;
+}
