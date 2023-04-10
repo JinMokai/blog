@@ -5,7 +5,10 @@ import Footer from "@components/footer.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const tagsEntries = await getCollection("blog");
+  const tagsEntries = await getCollection("blog", ({ data }) => {
+    // 如果是不是草稿就显示
+    return data.draft === false;
+  });
   const uniqueTags = [...new Set(tagsEntries.map((post) => post.data.tags).flat())];
   return uniqueTags.map((tag) => {
     // 筛选出包含tag标签的blog
@@ -36,7 +39,13 @@ const { posts } = Astro.props;
     <ul>
       {
         posts.map((post) => (
-          <ItemCard slug={post.slug} title={post.data.title} description={post.data.description} image={post.data.image} pubDate={post.data.pubDate}/>
+          <ItemCard
+            slug={post.slug}
+            title={post.data.title}
+            description={post.data.description}
+            image={post.data.image}
+            pubDate={post.data.pubDate}
+          />
         ))
       }
     </ul>

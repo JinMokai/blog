@@ -2,7 +2,10 @@
 import TagLayout from "@layouts/TagLayout.astro";
 import Tags from "@components/tags.astro";
 import { getCollection } from "astro:content";
-const tagsEntries = await getCollection("blog");
+const tagsEntries = await getCollection("blog", ({ data }) => {
+  // 如果是不是草稿就显示
+  return data.draft === false;
+});
 // 获取所有唯一标签
 // const tags = [...new Set(tagsEntries.map((post) => post.data.tags).flat())];
 const tagMap = new Map();
