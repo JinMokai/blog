@@ -6,8 +6,9 @@ export default defineConfig({
     site: "https://sage-souffle-01bff9.netlify.app/",
     markdown: {
         shikiConfig: {
-            theme: "github-dark",
+            theme: "dracula",
         },
+        syntaxHighlight: 'shiki',
         rehypePlugins: ['rehype-slug', ['rehype-autolink-headings', {
             behavior: 'wrap'
         }]],

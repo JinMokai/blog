@@ -31,23 +31,26 @@ function buildToc(headings) {
 <style>
     .toc {
         position: fixed;
-        right: 1em;
+        right: .5em;
         top: 5em;
         max-height: 50vh;
         max-width: 9.375rem;
-        outline: 1px solid;
+        outline: 1px solid #dcdcdc;
         padding-inline-start: .5rem;
         line-height: 1.5;
         overflow: auto;
+        background: #f5f5f5;
+        opacity: .8;
       }
     .toc::before {
       content: "目录";
+      color: #333;
     }
     .toc  ul {
         font-size: 0.625rem;
         list-style: none;
     }
-    @media (max-width: 880px) {
+    @media (max-width: 1120px) {
       .toc {
         display: none;
       }

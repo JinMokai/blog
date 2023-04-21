@@ -74,7 +74,7 @@ const readTime = arr[0] + " " + (arr[1] == "min" ? "分钟" : arr[1]);
 <script>
 
 // 获取所有标题元素和目录元素
-const headings = document.querySelectorAll(".markdown_content h1,h2,h3,h4,h5,h6");
+const headings = document.querySelectorAll(".mk h1,h2,h3,h4,h5,h6");
 // 在窗口上添加滚动事件处理函数
 window.addEventListener("scroll", () => {
   // 遍历所有标题元素
@@ -92,20 +92,4 @@ window.addEventListener("scroll", () => {
   });
 });
 
-// 懒加载
-let timer = null;
-function lazyLoad() {
-  clearTimeout(timer);
-  timer = setTimeout(() => {
-    const images = document.querySelectorAll('img[data-src]');
-    images.forEach((img) => {
-      const rect = img.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom >= 0) {
-        img.src = img.dataset.src;
-        img.removeAttribute('data-src');
-      }
-    });
-  }, 200);
-}
-window.addEventListener('scroll', lazyLoad);
 </script>

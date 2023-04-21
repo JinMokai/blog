@@ -1,8 +1,34 @@
 ---
-import "@styles/markdown.css"
-const { Content } = Astro.props
+import "@styles/markdown.css";
+const { Content } = Astro.props;
 ---
 
-<div class="markdown_content">
-    <Content />
+<div class="mk">
+  <Content />
 </div>
+
+<script>
+  const images = document.querySelectorAll(".mk img");
+  images.forEach((img) => {
+    // 创建一个figure元素
+    const figure = document.createElement("figure");
+    // 将img节点插入到figure元素中
+    img.parentNode.insertBefore(figure, img);
+    figure.appendChild(img);
+    // 为figure元素添加属性data-src-loaded="false"
+    figure.setAttribute("data-src-loaded", "false");
+  });
+
+  const lazyload = document.querySelectorAll(".mk figure");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.target.getAttribute("data-src-loaded") === "false") {
+        entry.target.querySelectorAll("img").forEach((img) => {
+          img.src = img.dataset.src;
+        });
+        entry.target.setAttribute("data-src-loaded", "true");
+      }
+    });
+  });
+  lazyload.forEach((lazy) => observer.observe(lazy));
+</script>

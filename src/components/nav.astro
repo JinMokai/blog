@@ -3,9 +3,7 @@ import Hamburger from "./Hamburger.astro";
 ---
 
 <div class="nav">
-  <div class="Hamburger">
-    <Hamburger />
-  </div>
+  <Hamburger class="Hamburger" />
   <div data-nav>
     <ul class="nav_ul">
       <li class="nav_li"><a href="/">主页</a></li>
@@ -23,7 +21,7 @@ import Hamburger from "./Hamburger.astro";
     box-sizing: border-box;
     /* padding: .5rem 1rem; */
     color: rgb(63 63 70);
-    transition: all .3s;
+    transition: all 0.3s;
   }
   .nav_ul {
     display: flex;
@@ -33,11 +31,11 @@ import Hamburger from "./Hamburger.astro";
     margin: 0 0.25rem;
     line-height: normal;
   }
-  .nav_li > a{
+  .nav_li > a {
     color: inherit;
     text-decoration: underline;
     text-underline-offset: 0.25rem;
-    transition: text-underline-offset .2s;
+    transition: text-underline-offset 0.2s;
   }
   .nav_li > a:hover {
     text-underline-offset: 0.125rem;
@@ -64,7 +62,7 @@ import Hamburger from "./Hamburger.astro";
     .nav_li a {
       font-size: 2rem;
     }
-    
+
     .Hamburger {
       display: block;
     }
@@ -76,14 +74,44 @@ import Hamburger from "./Hamburger.astro";
 </style>
 <script>
   let flag = 0;
-  document.querySelector('.Hamburger').addEventListener('click', () => {
-    document.querySelector("[data-nav]").classList.toggle("expanded");
+  let Hamburger = document.querySelector(".Hamburger");
+  let dataNav = document.querySelector("[data-nav]");
+  let nav = document.querySelector(".nav");
+  Hamburger.addEventListener("click", () => {
+    dataNav.classList.toggle("expanded");
     if (flag == 0) {
-      document.querySelector(".nav").style.backgroundColor="rgb(254, 207, 72, .2)";
+      nav.style.backgroundColor = "rgb(254, 207, 72, .2)";
       flag = 1;
     } else {
-      document.querySelector(".nav").style.backgroundColor="inherit";
+      nav.style.backgroundColor = "inherit";
       flag = 0;
     }
   });
+
+  // 定义节流函数
+  function throttle(func, delay) {
+    let timer = null;
+    return function () {
+      const context = this;
+      const args = arguments;
+      if (!timer) {
+        timer = setTimeout(function () {
+          func.apply(context, args);
+          timer = null;
+        }, delay);
+      }
+    };
+  }
+  /**
+   * 清除nav背景
+   */
+  function clearNavBg() {
+    if (window.innerWidth > 600) {
+      nav.style.background = "none";
+    }
+  }
+  // 在窗口大小发生变化时，动态获取窗口宽度并清除元素的背景样式
+  window.addEventListener("resize", throttle(clearNavBg, 500));
+  // 页面加载完成时，先执行一次事件处理程序
+  clearNavBg();
 </script>

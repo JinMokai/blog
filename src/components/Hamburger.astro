@@ -1,8 +1,8 @@
 ---
-
+const {class: navHamburger} = Astro.props
 ---
 
-<div class="hamburger">
+<div class:list={['hamburger',navHamburger]}>
     <span class="line"></span>
     <span class="line"></span>
     <span class="line"></span>
