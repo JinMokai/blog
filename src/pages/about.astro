@@ -2,7 +2,7 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Footer from "@components/footer.astro";
 import BackTop from "@components/backTop.astro";
-
+import aboutData from "@scripts/about.mjs";
 const title = "图片集";
 const description = "图片集";
 ---
@@ -10,90 +10,17 @@ const description = "图片集";
 <BaseLayout title={title} description={description}>
   <main>
     <section class="main_grid">
-      <figure data-src-loaded="false">
-        <img data-src="/assets/photoList/IMG_20210321_184810.jpg" alt="20210321_184810" />
-        <figcaption>
-          2021-3-21日南昌楼梯独照
-          <small>南昌</small>
-        </figcaption>
-      </figure>
-      <figure data-src-loaded="false">
-        <img data-src="/assets/photoList/mmexport1616329068492.jpg" alt="1616329068492" />
-        <figcaption>
-          2021-3-21日与好友张合照
-          <small>南昌</small>
-        </figcaption>
-      </figure>
-      <figure data-src-loaded="false">
-        <img data-src="/assets/photoList/IMG_20230107_112445.webp" alt="2023-1-7" />
-        <figcaption>
-          2023-1-7日鄱阳永福寺庙塔拍摄
-          <small>鄱阳</small>
-        </figcaption>
-      </figure>
-      <figure class="landscape" data-src-loaded="false">
-        <img data-src="/assets/photoList/IMG_20230107_103524.jpg" alt="2023-1-7" />
-        <figcaption>
-          2023-1-7日鄱阳楼拍摄
-          <small>鄱阳</small>
-        </figcaption>
-      </figure>
-      <figure class="protrait" data-src-loaded="false">
-        <img data-src="/assets/photoList/mmexport1661335245227.jpg" alt="2022-8-24" />
-        <figcaption>
-          2022-8-24日杭州伞博物馆
-          <small>杭州</small>
-        </figcaption>
-      </figure>
-      <figure data-src-loaded="false">
-        <img data-src="/assets/photoList/20230204.jpg" alt="2023-2-4" />
-        <figcaption>
-          2023-2-4日鄱阳县上士湖鄱阳湖瓦屑坝博物馆湖边
-          <small>鄱阳</small>
-        </figcaption>
-      </figure>
-      <figure data-src-loaded="false">
-        <img data-src="/assets/photoList/IMG_20230218_192205.jpg" alt="2023-2-18" />
-        <figcaption>
-          2023-2-18日新余学院拍摄
-          <small>新余</small>
-        </figcaption>
-      </figure>
-      <figure data-src-loaded="false">
-        <img data-src="/assets/photoList/IMG_20230226_153940.jpg" alt="2023-2-26" />
-        <figcaption>
-          2023-2-26日新余学院图书馆拍摄
-          <small>新余</small>
-        </figcaption>
-      </figure>
-      <figure class="landscape" data-src-loaded="false">
-        <img data-src="/assets/photoList/IMG_20230305_145530.jpg" alt="2023-3-5" />
-        <figcaption>
-          2023-3-5日新余学院行政楼(北)湖
-          <small>新余</small>
-        </figcaption>
-      </figure>
-      <figure class="protrait" data-src-loaded="false">
-        <img data-src="/assets/photoList/IMG_20230313_154713.jpg" alt="2023-3-13" />
-        <figcaption>
-          2023-3-13日新余学院数计楼
-          <small>新余</small>
-        </figcaption>
-      </figure>
-      <figure class="landscape" data-src-loaded="false">
-        <img data-src="/assets/photoList/IMG_20230408_071454.jpg" alt="2023-4-7" />
-        <figcaption>
-          2023-4-7日新余学院图书馆一角
-          <small>新余</small>
-        </figcaption>
-      </figure>
-      <figure class="protrait" data-src-loaded="false">
-        <img data-src="/assets/photoList/IMG_20230320_165111.jpg" alt="2023-3-20" />
-        <figcaption>
-          2023-3-13日新余学院数计楼蜜蜂采蜜
-          <small>新余</small>
-        </figcaption>
-      </figure>
+      {
+        aboutData.map((item) => (
+          <figure data-src-loaded="false" class:list={[{ landscape: item.land }, { protrait: item.pro }]}>
+            <img data-src={item.url} alt={item.alt} />
+            <figcaption>
+              {item.info}
+              <small>{item.place}</small>
+            </figcaption>
+          </figure>
+        ))
+      }
     </section>
   </main>
   <BackTop />
@@ -167,28 +94,27 @@ const description = "图片集";
   footer {
     margin-block-start: 6.25rem;
   }
-
 </style>
 
 <script>
-// 获取需要懒加载的figure元素
-const lazyload = document.querySelectorAll('.main_grid figure');
-// 创建一个Intersection Observer实例
-const observer = new IntersectionObserver(entries => {
-  // 遍历所有元素的Intersection Observer entry
-  entries.forEach(entry => {
-    // 如果元素进入可视区域且未加载过图片
-    if (entry.isIntersecting && entry.target.getAttribute('data-src-loaded') === 'false') {
-      // 遍历该元素内的所有img标签
-      entry.target.querySelectorAll('img').forEach(img => {
-        // 将img的data-src赋值给src，加载图片
-        img.src = img.dataset.src;
-      });
-      // 将该元素的data-src-loaded属性设置为true，表示该元素已经加载过图片，避免重复加载
-      entry.target.setAttribute('data-src-loaded', 'true');
-    }
+  // 获取需要懒加载的figure元素
+  const lazyload = document.querySelectorAll(".main_grid figure");
+  // 创建一个Intersection Observer实例
+  const observer = new IntersectionObserver((entries) => {
+    // 遍历所有元素的Intersection Observer entry
+    entries.forEach((entry) => {
+      // 如果元素进入可视区域且未加载过图片
+      if (entry.isIntersecting && entry.target.getAttribute("data-src-loaded") === "false") {
+        // 遍历该元素内的所有img标签
+        entry.target.querySelectorAll("img").forEach((img) => {
+          // 将img的data-src赋值给src，加载图片
+          img.src = img.dataset.src;
+        });
+        // 将该元素的data-src-loaded属性设置为true，表示该元素已经加载过图片，避免重复加载
+        entry.target.setAttribute("data-src-loaded", "true");
+      }
+    });
   });
-});
-// 遍历所有需要懒加载的元素，开始监听它们的可视区域
-lazyload.forEach(lazy => observer.observe(lazy));
+  // 遍历所有需要懒加载的元素，开始监听它们的可视区域
+  lazyload.forEach((lazy) => observer.observe(lazy));
 </script>

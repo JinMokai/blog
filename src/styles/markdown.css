@@ -10,9 +10,10 @@
   margin-bottom: 0.5em;
   font-weight: bold;
   line-height: 1.2;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  /* text-overflow: ellipsis;
+  overflow: hidden; */
 }
 
 .mk :is(h1, h2, h3, h4, h5, h6)::before {
