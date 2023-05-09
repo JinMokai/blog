@@ -6,7 +6,7 @@ description: "一张报纸引起的思考，使用css3多列布局columns!"
 author: "ch_kai"
 image:
     url: "/assets/content/newpapers/IMG_20210724_063838.jpg"
-    alt: "this is photo"
+    alt: "使用多列布局实现报纸"
 tags: ["css"]
 draft: false
 ---

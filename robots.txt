@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sage-souffle-01bff9.netlify.app/sitemap-index.xml

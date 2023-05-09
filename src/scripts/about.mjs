@@ -110,9 +110,25 @@ let aboutData =  [
     place: "新余",
     land: true,
     pro: false
+  },{
+    url: "IMG_20230508_181223.jpg",
+    alt: "2023-5-8",
+    info: "2023-5-8新余学院西边湖拍摄",
+    place: "新余",
+    land: false,
+    pro: true
+  },
+  {
+    url: "IMG_20230508_181258.jpg",
+    alt: "2023-5-8",
+    info: "2023-5-8新余学院西边湖拍摄",
+    place: "新余",
+    land: true,
+    pro: false
   }
 ]
 for (let i = 0; i < aboutData.length; i++) {
   aboutData[i].url = "/assets/photoList/" + aboutData[i].url
 }
-export default aboutData
+// 图片倒序
+export default aboutData.reverse()

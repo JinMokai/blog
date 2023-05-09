@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 import { remarkReadingTime } from './src/scripts/remark-reading-time.mjs';
 
 // https://astro.build/config
@@ -14,5 +15,6 @@ export default defineConfig({
         }]],
         remarkPlugins: [remarkReadingTime],
         extendDefaultPlugins: true
-    }
+    },
+    integrations: [sitemap()]
 });

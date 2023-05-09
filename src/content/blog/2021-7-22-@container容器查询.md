@@ -6,7 +6,7 @@ description: "@container容器查询，一种很新的语法！"
 author: "ch_kai"
 image:
     url: ""
-    alt: "this is photo"
+    alt: "This is an image placeholder, indicating that there is no image yet!"
 tags: ["css"]
 draft: false
 ---

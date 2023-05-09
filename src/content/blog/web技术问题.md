@@ -6,7 +6,7 @@ description: "有些问题很苦恼,使用gpt来回答自己问题！回答不�
 author: "ch_kai"
 image: 
     url: ""
-    alt: "this is photo"
+    alt: "This is an image placeholder, indicating that there is no image yet!"
 tags: ["技术问题"]
 draft: false
 ---
