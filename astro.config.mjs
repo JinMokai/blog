@@ -4,7 +4,7 @@ import { remarkReadingTime } from './src/scripts/remark-reading-time.mjs';
 
 // https://astro.build/config
 export default defineConfig({
-    site: "https://sage-souffle-01bff9.netlify.app/",
+    site: "https://chkaiblog.eu.org/",
     markdown: {
         shikiConfig: {
             theme: "dracula",
