@@ -236,3 +236,20 @@ console.log(child.gender); // male
 在上面的代码中，我们首先创建了一个名为grandparent的对象，它有一个name属性和一个sayHello方法。然后，我们使用Object.create方法创建了一个名为parent的对象，它的原型指向grandparent对象，同时添加了一个age属性。最后，我们使用Object.create方法创建了一个名为child的对象，它的原型指向parent对象，同时添加了一个gender属性。在这个例子中，我们实现了多层继承，即child对象继承了grandparent、parent对象的属性和方法。
 
 需要注意的是，尽管上述代码实现了多层继承，但这种方式不太常用，因为它的实现比较复杂，而且容易出错。如果需要实现多层继承，建议使用ES6中的class和extends关键字，或者使用其他可靠的继承方式。
+
+## rollup打包工具的优点？为什么vite基于它？缺点有是什么？和webpack相比如何？
+
+Rollup 是一个 JavaScript 模块打包器，它的主要优点包括：
+
+1. 体积更小：Rollup 可以将代码打包为更小的体积。这是因为它使用 ES6 模块语法，能够更好地进行 Tree Shaking（树摇）和代码去重。
+2. 更高的性能：相比于其他打包工具，Rollup 的构建速度更快，生成的代码也更加简洁易懂。
+3. 支持现代化的 JavaScript：Rollup 支持 ES6、ES7 等现代化的 JavaScript 特性，可以更好地满足开发者的需求。
+
+Vite 在构建过程中使用的是 Rollup，主要是因为 Rollup 有上述优点，能够更好地适应现代化的前端开发需要。此外，Rollup 作为一个纯粹的模块打包器，可以更好地配合 Vite 的“按需编译”特性，提高开发效率。
+
+当然，Rollup 也有一些缺点：
+
+1. 生态较小：相比于 Webpack，Rollup 的生态要小一些，可能需要花费更多的时间去寻找与 Rollup 兼容的插件。
+2. 集成工具较少：Rollup 对于 CSS 样式文件、图片等资源处理不如 Webpack 方便，需要开发者手动集成相关的工具插件。
+
+与 Webpack 相比，Rollup 更加专注于模块打包，因此对于纯前端项目来说，功能相对有限。而 Webpack 则在更多的场景下发挥作用，如处理样式、图片、字体等资源。虽然 Webpack 在一些场景下更加常用和方便，但是随着现代化开发需求的增长，Rollup 的优点逐渐被人们认识和接受。
